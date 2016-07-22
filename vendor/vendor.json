@@ -3,6 +3,42 @@
 	"ignore": "test",
 	"package": [
 		{
+			"path": "appengine",
+			"revision": ""
+		},
+		{
+			"path": "appengine/urlfetch",
+			"revision": ""
+		},
+		{
+			"path": "appengine/user",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "hit0KHqGmk64CI1innj6zL4fs08=",
+			"path": "github.com/bugsnag/bugsnag-go",
+			"revision": "31ae3484de3e96dbc4de1756b14ad6393b94103c",
+			"revisionTime": "2016-06-16T00:55:02Z"
+		},
+		{
+			"checksumSHA1": "zxHs+p2FrgwC6X2B+OlkKjSFWzo=",
+			"path": "github.com/bugsnag/bugsnag-go/errors",
+			"revision": "31ae3484de3e96dbc4de1756b14ad6393b94103c",
+			"revisionTime": "2016-06-16T00:55:02Z"
+		},
+		{
+			"checksumSHA1": "ERKaUVBHSzWn+qi2ESfDfjLp9lA=",
+			"path": "github.com/bugsnag/osext",
+			"revision": "0dd3f918b21bec95ace9dc86c7e70266cfc5c702",
+			"revisionTime": "2013-06-17T22:48:35Z"
+		},
+		{
+			"checksumSHA1": "xXoqwy31mrubWHCXvnscHqtcoPs=",
+			"path": "github.com/bugsnag/panicwrap",
+			"revision": "d6191e27ad06236eaad65d79e49a08b03b9f8029",
+			"revisionTime": "2016-04-01T22:14:33Z"
+		},
+		{
 			"checksumSHA1": "lUBE/ZMjzN5VJkT6lgQw3WI72lo=",
 			"path": "github.com/dustin/go-humanize",
 			"revision": "2fcb5204cdc65b4bec9fd0a87606bb0d0e3c54e8",

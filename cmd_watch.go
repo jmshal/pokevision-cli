@@ -1,10 +1,11 @@
 package main
 
 import (
+    "github.com/bugsnag/bugsnag-go"
+    "github.com/urfave/cli"
     "log"
     "fmt"
     "time"
-    "github.com/urfave/cli"
 )
 
 var WatchCommand = cli.Command{
@@ -50,6 +51,7 @@ func WatchAction(c *cli.Context) error {
 
     pokedex, err := LoadPokedex()
     if err != nil {
+        bugsnag.Notify(err)
         log.Fatalln(err)
     }
 
@@ -61,12 +63,14 @@ func WatchAction(c *cli.Context) error {
         if count > 1 || forceInitial {
             err = UpdatePokemonInRegion(lat, lon)
             if err != nil {
+                bugsnag.Notify(err)
                 log.Fatalln(err)
             }
         }
 
         current, err := FetchPokemonsInRegion(lat, lon)
         if err != nil {
+            bugsnag.Notify(err)
             log.Fatalln(err)
         }
 
