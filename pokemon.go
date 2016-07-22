@@ -3,12 +3,12 @@ package main
 import "time"
 
 type Pokemon struct {
-    ID        string         `json:"id"`
-    ExpiresAt time.Time      `json:"expiration_time"`
-    PokedexID int            `json:"pokemonId"`
-    Latitude  float64        `json:"latitude"`
-    Longitude float64        `json:"longitude"`
-    IsAlive   bool           `json:"is_alive"`
+    ID        string
+    ExpiresAt time.Time
+    PokedexID int
+    Latitude  float64
+    Longitude float64
+    IsAlive   bool
 }
 
 func (p *Pokemon) IsVisible() bool {

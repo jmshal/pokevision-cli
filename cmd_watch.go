@@ -38,6 +38,10 @@ func WatchAction(c *cli.Context) error {
     interval := c.Int("interval")
     forceInitial := c.Bool("force-initial")
 
+    if interval < 30 {
+        interval = 30;
+    }
+
     if lat == 0 && lon == 0 {
         log.Fatalln("Must provide coordinates (pokevision watch --lat=34.00846023931052 --lon=-118.49802017211914)")
     }

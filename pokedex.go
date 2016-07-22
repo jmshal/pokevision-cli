@@ -8,6 +8,11 @@ const (
     POKEDEX_REGISTRY_URL string = "https://gist.githubusercontent.com/jacobmarshall/4b990717a8d4221586df9f9e68414894/raw/pokedex.json"
 )
 
+type PokedexPokemon struct {
+    Index int
+    Name  string
+}
+
 func LoadPokedex() (map[int]PokedexPokemon, error) {
     unparsed, err := RequestJSON(POKEDEX_REGISTRY_URL)
     if err != nil {
