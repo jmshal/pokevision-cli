@@ -7,6 +7,10 @@
 			"revision": ""
 		},
 		{
+			"path": "appengine/cloudsql",
+			"revision": ""
+		},
+		{
 			"path": "appengine/urlfetch",
 			"revision": ""
 		},
@@ -45,10 +49,58 @@
 			"revisionTime": "2016-07-21T06:51:13Z"
 		},
 		{
+			"checksumSHA1": "0xIBiVOmW6JxXyxOZsBTtHF1Jxw=",
+			"path": "github.com/erikstmartin/go-testdb",
+			"revision": "8d10e4a1bae52cd8b81ffdec3445890d6dccab3d",
+			"revisionTime": "2016-02-19T21:45:06Z"
+		},
+		{
+			"checksumSHA1": "oigwHdtDGtv0Essm53eYMVr/b34=",
+			"path": "github.com/kellydunn/golang-geo",
+			"revision": "6f16b0ccf2a6ebd1a234daacfb6199510fbd0db4",
+			"revisionTime": "2016-02-15T19:45:13Z"
+		},
+		{
+			"checksumSHA1": "CZVX2mcYfPfl6dCRbryJtd7k4DM=",
+			"path": "github.com/kylelemons/go-gypsy/yaml",
+			"revision": "42fc2c7ee9b8bd0ff636cd2d7a8c0a49491044c5",
+			"revisionTime": "2014-12-10T19:12:37Z"
+		},
+		{
+			"checksumSHA1": "QK3MNUdQwUBuznCHZcPijU/3DyI=",
+			"path": "github.com/lib/pq",
+			"revision": "4dd446efc17690bc53e154025146f73203b18309",
+			"revisionTime": "2016-06-23T22:06:37Z"
+		},
+		{
+			"checksumSHA1": "xppHi82MLqVx1eyQmbhTesAEjx8=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "4dd446efc17690bc53e154025146f73203b18309",
+			"revisionTime": "2016-06-23T22:06:37Z"
+		},
+		{
 			"checksumSHA1": "0Il1DbcyN359or+I4zLd6lwFirk=",
 			"path": "github.com/urfave/cli",
 			"revision": "11c134509d89c2018675f369955218a180dc7428",
 			"revisionTime": "2016-07-16T16:11:36Z"
+		},
+		{
+			"checksumSHA1": "Y7zNtz9D10KC12SHZobJ+ji5KsQ=",
+			"path": "github.com/ziutek/mymysql/godrv",
+			"revision": "8787d5581eb63f3f3b447f40c13f8e69e73f1b58",
+			"revisionTime": "2016-06-23T12:35:11Z"
+		},
+		{
+			"checksumSHA1": "eXEiPlpDRaamJQ4vPX/9t333kQc=",
+			"path": "github.com/ziutek/mymysql/mysql",
+			"revision": "8787d5581eb63f3f3b447f40c13f8e69e73f1b58",
+			"revisionTime": "2016-06-23T12:35:11Z"
+		},
+		{
+			"checksumSHA1": "gsr2Hefl2uwZd95XjCqkZv8fx0o=",
+			"path": "github.com/ziutek/mymysql/native",
+			"revision": "8787d5581eb63f3f3b447f40c13f8e69e73f1b58",
+			"revisionTime": "2016-06-23T12:35:11Z"
 		}
 	],
 	"rootPath": "github.com/jacobmarshall/pokevision-cli"

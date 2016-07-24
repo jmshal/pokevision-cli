@@ -21,6 +21,10 @@ var WatchCommand = cli.Command{
             Name:  "lat",
             Usage: "the region's latitude coordinate",
         },
+        cli.StringFlag{
+            Name:  "name",
+            Usage: "the name of the region for notifying",
+        },
         cli.IntFlag{
             Name:  "interval",
             Value: 30,
@@ -30,6 +34,22 @@ var WatchCommand = cli.Command{
             Name:  "force-initial",
             Usage: "forces the initial region fetch to check for new pokémon (slower initially)",
         },
+        cli.BoolFlag{
+            Name:  "slack",
+            Usage: "send updates to slack (as well as stdout)",
+        },
+        cli.StringFlag{
+            Name:  "slack-webhook-url",
+            Usage: "the slack webhook to send the payload to",
+        },
+        cli.StringFlag{
+            Name:  "slack-channel",
+            Usage: "override the webhook's default channel",
+        },
+        cli.BoolFlag{
+            Name:  "forever",
+            Usage: "keeps retrying even when the API is down",
+        },
     },
 }
 
@@ -38,6 +58,20 @@ func WatchAction(c *cli.Context) error {
     lon := c.Float64("lon")
     interval := c.Int("interval")
     forceInitial := c.Bool("force-initial")
+    slack := c.Bool("slack")
+    slackWebhookUrl := c.String("slack-webhook-url")
+    name := c.String("name")
+    exitOnError := !c.BoolT("forever")
+    slackChannel := c.String("slack-channel")
+
+    handleError := func(err error) {
+        if exitOnError {
+            bugsnag.Notify(err)
+            log.Fatalln(err)
+        } else {
+            time.Sleep(time.Second * time.Duration(5))
+        }
+    }
 
     if interval < 30 {
         interval = 30;
@@ -48,6 +82,11 @@ func WatchAction(c *cli.Context) error {
     }
 
     var pokemon []Pokemon
+    var slackClient SlackClient
+
+    if slack {
+        slackClient = CreateSlackClient(slackWebhookUrl)
+    }
 
     pokedex, err := LoadPokedex()
     if err != nil {
@@ -63,27 +102,57 @@ func WatchAction(c *cli.Context) error {
         if count > 1 || forceInitial {
             err = UpdatePokemonInRegion(lat, lon)
             if err != nil {
-                bugsnag.Notify(err)
-                log.Fatalln(err)
+                handleError(err)
+                continue
             }
         }
 
         current, err := FetchPokemonsInRegion(lat, lon)
         if err != nil {
-            bugsnag.Notify(err)
-            log.Fatalln(err)
+            handleError(err)
+            continue
         }
 
         new := GetUpdates(pokemon, current).New
 
         if len(new) > 0 {
-            log.Println("Found new Pokémon...")
+            //log.Println("Found new Pokémon...")
         }
 
         for _, pokemon := range new {
             if pokemon.IsVisible() {
                 pokedexPokemon := pokedex[pokemon.PokedexID]
-                log.Println(fmt.Sprintf("%v (%v) at %v/%v", pokedexPokemon.Name, HumanTime(pokemon.ExpiresAt), pokemon.Latitude, pokemon.Longitude))
+                pokemonName := pokedexPokemon.Name
+                pokemonExpiresAtHuman := HumanTime(pokemon.ExpiresAt)
+                pokemonLatitude := pokemon.Latitude
+                pokemonLongitude := pokemon.Longitude
+                pokemonCoords := fmt.Sprintf("%v/%v", pokemonLatitude, pokemonLongitude)
+                pokemonDistance := DistanceBetweenM(lat, lon, pokemonLatitude, pokemonLongitude)
+                if name != "" {
+                    pokemonCoords = fmt.Sprintf("%v (%v)", name, pokemonCoords)
+                }
+
+                fmt.Println(fmt.Sprintf("%v (%v) located near %v", pokemonName, pokemonExpiresAtHuman, pokemonCoords))
+
+                if slack {
+                    slackClient.SendPayload(SlackPayload{
+                        IconURL: pokedexPokemon.Icon(),
+                        Markdown: true,
+                        Channel: slackChannel,
+                        Attachments: []SlackAttachment{
+                            {
+                                Title: pokemonName,
+                                TitleLink: fmt.Sprintf("https://maps.google.com/maps?q=%v,%v&z=19", pokemonLatitude, pokemonLongitude),
+                                Fallback: fmt.Sprintf("%v located near %v", pokemonName, name),
+                                Fields: []SlackAttachmentField{
+                                    {Title: "Expires in", Value: pokemonExpiresAtHuman, Short: true},
+                                    {Title: "Location", Value: name, Short: true},
+                                    {Title: "Distance", Value: pokemonDistance, Short: true},
+                                },
+                            },
+                        },
+                    })
+                }
             }
         }
 
