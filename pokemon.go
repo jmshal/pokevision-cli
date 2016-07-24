@@ -3,7 +3,7 @@ package main
 import "time"
 
 type Pokemon struct {
-    ID        string
+    ID        int
     ExpiresAt time.Time
     PokedexID int
     Latitude  float64

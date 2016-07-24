@@ -4,15 +4,15 @@ type Updates struct {
     New []Pokemon
 }
 
-func getPokemonIds(pokemons []Pokemon) []string {
-    var ids []string
+func getPokemonIds(pokemons []Pokemon) []int {
+    var ids []int
     for _, pokemon := range pokemons {
         ids = append(ids, pokemon.ID)
     }
     return ids
 }
 
-func contains(arr []string, item string) bool {
+func contains(arr []int, item int) bool {
     for _, value := range arr {
         if value == item {
             return true

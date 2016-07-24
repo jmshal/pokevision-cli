@@ -3,7 +3,6 @@ package main
 import (
     "fmt"
     "time"
-    "strconv"
 )
 
 const (
@@ -19,9 +18,9 @@ func FetchPokemonsInRegion(lat, lon float64) ([]Pokemon, error) {
     pokemons := make([]Pokemon, len(rawPokemons))
     for index, unusableRawPokemon := range rawPokemons {
         rawPokemon := unusableRawPokemon.(map[string]interface{})
-        pokemonId, _ := strconv.Atoi(rawPokemon["pokemonId"].(string))
+        pokemonId := int(rawPokemon["pokemonId"].(float64))
         pokemons[index] = Pokemon{
-            ID: rawPokemon["id"].(string),
+            ID: int(rawPokemon["id"].(float64)),
             ExpiresAt: time.Unix(int64(rawPokemon["expiration_time"].(float64)), 0),
             PokedexID: pokemonId,
             Latitude: rawPokemon["latitude"].(float64),
