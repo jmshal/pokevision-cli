@@ -4,6 +4,7 @@ import "time"
 
 type Pokemon struct {
     ID        int
+    UID       string
     ExpiresAt time.Time
     PokedexID int
     Latitude  float64
