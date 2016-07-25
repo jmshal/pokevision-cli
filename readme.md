@@ -1,10 +1,10 @@
-# (Unofficial) PokeVision CLI
+# (Unofficial) PokéVision CLI
 
-This tool allows you to talk directly to the PokeVision.com API servers. Right now there is only one command - `pokevision watch`, which monitors the coordinates provided for new Pokémon, and logs their location & expiration time.
+This tool allows you to talk directly to the PokéVision API servers. Right now there is only one command - `pokevision watch`, which monitors the coordinates provided for new Pokémon, and logs their location & expiration time.
 
 ## Features
 
-- Periodically checks the PokeVision API for new Pokémon
+- Periodically checks the PokéVision API for new Pokémon
 - Push updates to a Slack channel
 - No dependencies, lightweight & simple
 
@@ -53,7 +53,7 @@ Expires in 4 minutes
 
 ## Acknowledgments
 
-- **[PokeVision.com](https://pokevision.com)** for providing the backend service for this CLI to communicate with. Without them, none of this would be possible.
+- **[PokéVision](https://pokevision.com)** for providing the backend service for this CLI to communicate with. Without them, none of this would be possible.
 
 ## License
 
