@@ -5,7 +5,7 @@ This tool allows you to talk directly to the PokeVision.com API servers. Right n
 ## Install
 
 ```sh
-$ wget https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.3/darwin-amd64.tar.gz
+$ curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.4/darwin-amd64.tar.gz
 $ tar -xvzf darwin-amd64.tar.gz
 $ sudo mv ./pokevision /usr/local/bin
 ```
