@@ -1,3 +1,5 @@
+**The PokéVision servers are now behind CloudFlare DDoS protection, meaning right now the tool does not function. I've contacted the PokéVision team to see if we can work out a solution - as this tool is meant to lessen the load teams put on their servers.**
+
 # (Unofficial) PokéVision CLI
 
 This tool allows you to talk directly to the PokéVision API servers. Right now there is only one command - `pokevision watch`, which monitors the coordinates provided for new Pokémon, and logs their location & expiration time.
