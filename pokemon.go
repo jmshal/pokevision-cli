@@ -14,3 +14,7 @@ type Pokemon struct {
 func (p *Pokemon) IsVisible() bool {
     return p.IsAlive && p.ExpiresAt.After(time.Now())
 }
+
+func (p *Pokemon) IsInRange(lat, lon float64, distance int) bool {
+    return int(DistanceBetween(lat, lon, p.Latitude, p.Longitude)) < distance
+}

@@ -10,6 +10,15 @@ const (
     POKEDEX_POKEMON_ICON_URL string = "https://ugc.pokevision.com/images/pokemon/%v.png"
 )
 
+var (
+    // Rattata
+    // Pidgey
+    // Weedle
+    // Caterpie
+    // Zubat
+    COMMON_POKEMON []int = []int{19, 16, 13, 10, 41}
+)
+
 type PokedexPokemon struct {
     Index int
     Name  string
@@ -33,4 +42,13 @@ func LoadPokedex() (map[int]PokedexPokemon, error) {
 
 func (p *PokedexPokemon) Icon() string {
     return fmt.Sprintf(POKEDEX_POKEMON_ICON_URL, p.Index)
+}
+
+func (p *PokedexPokemon) IsCommon() bool {
+    for _, index := range COMMON_POKEMON {
+        if p.Index == index {
+            return true
+        }
+    }
+    return false
 }

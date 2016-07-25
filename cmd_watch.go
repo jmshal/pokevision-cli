@@ -50,6 +50,15 @@ var WatchCommand = cli.Command{
             Name:  "forever",
             Usage: "keeps retrying even when the API is down",
         },
+        cli.IntFlag{
+            Name:  "range",
+            Usage: "the maximum range to report (in meters)",
+            Value: 100,
+        },
+        cli.BoolFlag{
+            Name:  "ignore-common",
+            Usage: "prevents notifying you of pokémon which show up litterally everywhere",
+        },
     },
 }
 
@@ -63,6 +72,8 @@ func WatchAction(c *cli.Context) error {
     name := c.String("name")
     exitOnError := !c.BoolT("forever")
     slackChannel := c.String("slack-channel")
+    maxRange := c.Int("range")
+    ignoreCommon := c.Bool("ignore-common")
 
     handleError := func(err error) {
         if exitOnError {
@@ -120,8 +131,12 @@ func WatchAction(c *cli.Context) error {
         }
 
         for _, pokemon := range new {
-            if pokemon.IsVisible() {
-                pokedexPokemon := pokedex[pokemon.PokedexID]
+            pokedexPokemon := pokedex[pokemon.PokedexID]
+            ignore := false
+            if ignoreCommon {
+                ignore = pokedexPokemon.IsCommon()
+            }
+            if !ignore && pokemon.IsVisible() && pokemon.IsInRange(lat, lon, maxRange) {
                 pokemonName := pokedexPokemon.Name
                 pokemonExpiresAtHuman := HumanTime(pokemon.ExpiresAt)
                 pokemonLatitude := pokemon.Latitude
