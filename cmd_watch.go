@@ -4,7 +4,6 @@ import (
     "github.com/bugsnag/bugsnag-go"
     "github.com/urfave/cli"
     "log"
-    "fmt"
     "time"
 )
 
@@ -63,41 +62,44 @@ var WatchCommand = cli.Command{
 }
 
 func WatchAction(c *cli.Context) error {
-    lat := c.Float64("lat")
-    lon := c.Float64("lon")
-    interval := c.Int("interval")
-    forceInitial := c.Bool("force-initial")
-    slack := c.Bool("slack")
-    slackWebhookUrl := c.String("slack-webhook-url")
-    name := c.String("name")
-    exitOnError := !c.BoolT("forever")
-    slackChannel := c.String("slack-channel")
-    maxRange := c.Int("range")
-    ignoreCommon := c.Bool("ignore-common")
+    config := Config{
+        Name: c.String("name"),
+        Lat: c.Float64("lat"),
+        Lon: c.Float64("lon"),
+        Interval: c.Int("interval"),
+        ForceInitial: c.Bool("force-initial"),
+        Forever: c.BoolT("forever"),
+        Range: c.Int("range"),
+        IgnoreCommon: c.Bool("ignore-common"),
+        Slack: SlackConfig{
+            Enable: c.Bool("slack"),
+            WebhookURL: c.String("slack-webhook-url"),
+            Channel: c.String("slack-channel"),
+        },
+    }
 
     handleError := func(err error) {
-        if exitOnError {
+        if config.Forever {
+            time.Sleep(time.Second * time.Duration(5))
+        } else {
             bugsnag.Notify(err)
             log.Fatalln(err)
-        } else {
-            time.Sleep(time.Second * time.Duration(5))
         }
     }
 
-    if interval < 30 {
-        interval = 30;
+    if config.Interval < 30 {
+        config.Interval = 30;
     }
 
-    if lat == 0 && lon == 0 {
+    if config.Lat == 0 && config.Lon == 0 {
         log.Fatalln("Must provide coordinates (pokevision watch --lat=34.00846023931052 --lon=-118.49802017211914)")
     }
 
-    var pokemon []Pokemon
-    var slackClient SlackClient
-
-    if slack {
-        slackClient = CreateSlackClient(slackWebhookUrl)
+    if config.Name == "" {
+        log.Fatalln("Must provide a display name for the location (pokevision watch --lat=34.00846023931052 --lon=-118.49802017211914 --name=Beach)")
     }
+
+    var pokemon []Pokemon
 
     pokedex, err := LoadPokedex()
     if err != nil {
@@ -110,15 +112,15 @@ func WatchAction(c *cli.Context) error {
         count++
 
         // Let the first request be the quickest, updating pokemon regions can be slow
-        if count > 1 || forceInitial {
-            err = UpdatePokemonInRegion(lat, lon)
+        if count > 1 || config.ForceInitial {
+            err = UpdatePokemonInRegion(config.Lat, config.Lon)
             if err != nil {
                 handleError(err)
                 continue
             }
         }
 
-        current, err := FetchPokemonsInRegion(lat, lon)
+        current, err := FetchPokemonsInRegion(config.Lat, config.Lon)
         if err != nil {
             handleError(err)
             continue
@@ -126,52 +128,24 @@ func WatchAction(c *cli.Context) error {
 
         new := GetUpdates(pokemon, current).New
 
-        if len(new) > 0 {
-            //log.Println("Found new Pokémon...")
-        }
-
         for _, pokemon := range new {
-            pokedexPokemon := pokedex[pokemon.PokedexID]
+            pokedexPokemon := pokedex.Get(pokemon.PokedexID)
             ignore := false
-            if ignoreCommon {
+            if config.IgnoreCommon {
                 ignore = pokedexPokemon.IsCommon()
             }
-            if !ignore && pokemon.IsVisible() && pokemon.IsInRange(lat, lon, maxRange) {
-                pokemonName := pokedexPokemon.Name
-                pokemonExpiresAtHuman := HumanTime(pokemon.ExpiresAt)
-                pokemonLatitude := pokemon.Latitude
-                pokemonLongitude := pokemon.Longitude
-                pokemonCoords := fmt.Sprintf("%v/%v", pokemonLatitude, pokemonLongitude)
-                pokemonDistance := DistanceBetweenM(lat, lon, pokemonLatitude, pokemonLongitude)
-                if name != "" {
-                    pokemonCoords = fmt.Sprintf("%v (%v)", name, pokemonCoords)
-                }
+            if !ignore && pokemon.IsVisible() && pokemon.IsInRange(config.Lat, config.Lon, config.Range) {
+                meta := GetPokemonMeta(config, pokedex, pokemon)
 
-                fmt.Println(fmt.Sprintf("%v (%v) located near %v", pokemonName, pokemonExpiresAtHuman, pokemonCoords))
+                OutputToTerminal(meta, config)
 
-                if slack {
-                    slackClient.SendPayload(SlackPayload{
-                        IconURL: pokedexPokemon.Icon(),
-                        Markdown: true,
-                        Channel: slackChannel,
-                        Attachments: []SlackAttachment{
-                            {
-                                Title: pokemonName,
-                                TitleLink: fmt.Sprintf("https://maps.google.com/maps?q=%v,%v&z=19", pokemonLatitude, pokemonLongitude),
-                                Fallback: fmt.Sprintf("%v located near %v", pokemonName, name),
-                                Fields: []SlackAttachmentField{
-                                    {Title: "Expires in", Value: pokemonExpiresAtHuman, Short: true},
-                                    {Title: "Location", Value: name, Short: true},
-                                    {Title: "Distance", Value: pokemonDistance, Short: true},
-                                },
-                            },
-                        },
-                    })
+                if config.Slack.Enable {
+                    go OutputToSlack(meta, config)
                 }
             }
         }
 
         pokemon = current
-        time.Sleep(time.Second * time.Duration(interval))
+        time.Sleep(time.Second * time.Duration(config.Interval))
     }
 }

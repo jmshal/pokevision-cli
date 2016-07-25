@@ -24,20 +24,28 @@ type PokedexPokemon struct {
     Name  string
 }
 
-func LoadPokedex() (map[int]PokedexPokemon, error) {
+type Pokedex struct {
+    index map[int]PokedexPokemon
+}
+
+func LoadPokedex() (Pokedex, error) {
     unparsed, err := RequestJSON(POKEDEX_REGISTRY_URL)
     if err != nil {
-        return nil, err
+        return Pokedex{}, err
     }
     parsed := make(map[int]PokedexPokemon)
     for key, value := range unparsed {
         index, err := strconv.Atoi(key)
         if err != nil {
-            return nil, err
+            return Pokedex{}, err
         }
         parsed[index] = PokedexPokemon{index, value.(string)}
     }
-    return parsed, nil
+    return Pokedex{parsed}, nil
+}
+
+func (dex *Pokedex) Get(index int) PokedexPokemon {
+    return dex.index[index]
 }
 
 func (p *PokedexPokemon) Icon() string {
