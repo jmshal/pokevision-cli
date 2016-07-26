@@ -21,6 +21,7 @@ The following platforms are officially supported. This means they're tested befo
 
 - Mac OS X El Capitan (64 bit)
 - Windows 10 (64 bit)
+- Ubuntu 16.04 (64 bit)
 
 *Other platforms (like Linux) are probably 100% compatible, but they're not frequently tested.*
 
