@@ -11,7 +11,11 @@ for GOOS in darwin windows linux; do
         FILENAME="pokevision.exe"
     fi
     GOOS=$GOOS GOARCH=$GOARCH go build -o ./bin/$GOOS/$GOARCH/$FILENAME ./
-    tar -C ./bin/$GOOS/$GOARCH/ -cvzf ./bin/$GOOS-$GOARCH.tar.gz .
+    if [ "windows" == $GOOS ]; then
+        zip -rjX ./bin/$GOOS-$GOARCH.zip ./bin/$GOOS/$GOARCH/
+    else
+        tar -C ./bin/$GOOS/$GOARCH/ -cvzf ./bin/$GOOS-$GOARCH.tar.gz .
+    fi
   done
 done
 
