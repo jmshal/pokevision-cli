@@ -1,4 +1,4 @@
-**The PokéVision servers are now behind CloudFlare DDoS protection, meaning right now the tool does not function. I've contacted the PokéVision team to see if we can work out a solution - as this tool is meant to lessen the load teams put on their servers.**
+**The PokéVision servers are now behind CloudFlare DDoS protection, meaning it's possible that during certain parts of the day, the cli is unable to communicate with their servers.**
 
 # (Unofficial) PokéVision CLI
 
