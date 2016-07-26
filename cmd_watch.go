@@ -52,7 +52,7 @@ var WatchCommand = cli.Command{
         cli.IntFlag{
             Name:  "range",
             Usage: "the maximum range to report (in meters)",
-            Value: 100,
+            Value: 500,
         },
         cli.BoolFlag{
             Name:  "ignore-common",
@@ -130,11 +130,12 @@ func WatchAction(c *cli.Context) error {
 
         for _, pokemon := range new {
             pokedexPokemon := pokedex.Get(pokemon.PokedexID)
-            ignore := false
-            if config.IgnoreCommon {
-                ignore = pokedexPokemon.IsCommon()
-            }
-            if !ignore && pokemon.IsVisible() && pokemon.IsInRange(config.Lat, config.Lon, config.Range) {
+
+            shouldIgnore := config.IgnoreCommon && pokedexPokemon.IsCommon()
+            isVisible := pokemon.IsVisible()
+            isInRange := pokemon.IsInRange(config.Lat, config.Lon, config.Range)
+
+            if !shouldIgnore && isVisible && isInRange {
                 meta := GetPokemonMeta(config, pokedex, pokemon)
 
                 OutputToTerminal(meta, config)
