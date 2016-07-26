@@ -10,6 +10,20 @@ This tool allows you to talk directly to the PokéVision API servers. Right now 
 - Push updates to a Slack channel
 - No dependencies, lightweight & simple
 
+## Screenshots
+
+![Slack notifications](./screenshot-slack.png)
+![Terminal output](./screenshot-terminal.png)
+
+## Support
+
+The following platforms are officially supported. This means they're tested before each release.
+
+- Mac OS X El Capitan (64 bit)
+- Windows 10 (64 bit)
+
+*Other platforms (like Linux) are probably 100% compatible, but they're not frequently tested.*
+
 ## Install
 
 ```sh
