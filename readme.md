@@ -12,6 +12,7 @@ This tool allows you to talk directly to the PokéVision API servers. Right now 
 
 ## Screenshots
 
+![Desktop notifications](./screenshot-notification.png)
 ![Slack notifications](./screenshot-slack.png)
 ![Terminal output](./screenshot-terminal.png)
 
