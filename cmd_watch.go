@@ -12,6 +12,11 @@ var WatchCommand = cli.Command{
     Usage:  "watches for new pokémon in a region",
     Action: WatchAction,
     Flags:  []cli.Flag {
+        cli.StringFlag{
+            Name:  "locale",
+            Usage: "the locale for Pokémon names",
+            Value: "en",
+        },
         cli.Float64Flag{
             Name:  "lon",
             Usage: "the region's longitude coordinate",
@@ -67,6 +72,7 @@ var WatchCommand = cli.Command{
 
 func WatchAction(c *cli.Context) error {
     config := Config{
+        Locale: c.String("locale"),
         Name: c.String("name"),
         Lat: c.Float64("lat"),
         Lon: c.Float64("lon"),
@@ -108,7 +114,7 @@ func WatchAction(c *cli.Context) error {
 
     var pokemon []Pokemon
 
-    pokedex, err := LoadPokedex()
+    pokedex, err := LoadPokedex(config.Locale)
     if err != nil {
         bugsnag.Notify(err)
         log.Fatalln(err)

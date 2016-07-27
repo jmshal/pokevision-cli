@@ -3,6 +3,12 @@ if [ -d ./bin ]; then
     rm -rf ./bin/*
 fi
 
+echo "Installing dependencies..."
+govendor sync
+
+echo "Compiling assets..."
+go-bindata -prefix assets/ -pkg main -o asset.go assets/
+
 for GOOS in darwin windows linux; do
   for GOARCH in 386 amd64; do
     echo "Building $GOOS/$GOARCH..."

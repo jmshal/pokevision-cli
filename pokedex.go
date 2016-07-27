@@ -3,12 +3,10 @@ package main
 import (
     "strconv"
     "fmt"
-    "io/ioutil"
     "encoding/json"
 )
 
 const (
-    POKEDEX_REGISTRY_URL string = "https://gist.githubusercontent.com/jacobmarshall/4b990717a8d4221586df9f9e68414894/raw/pokedex.json"
     POKEDEX_POKEMON_ICON_URL string = "https://ugc.pokevision.com/images/pokemon/%v.png"
 )
 
@@ -30,16 +28,9 @@ type Pokedex struct {
     index map[int]PokedexPokemon
 }
 
-func LoadPokedex() (Pokedex, error) {
+func LoadPokedex(locale string) (Pokedex, error) {
     pokedex := Pokedex{}
-    filePath, _ := getCachePath("pokedex.json")
-    if !existsInCache(filePath) {
-        err := RequestToPath(POKEDEX_REGISTRY_URL, filePath)
-        if err != nil {
-            return pokedex, err
-        }
-    }
-    file, err := ioutil.ReadFile(filePath)
+    file, err := Asset("pokedex." + locale + ".json")
     if err != nil {
         return pokedex, err
     }

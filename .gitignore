@@ -1,3 +1,4 @@
 vendor/
 !vendor/vendor.json
 bin/
+asset.go
