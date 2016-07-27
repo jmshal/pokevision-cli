@@ -3,6 +3,8 @@ package main
 import (
     "strconv"
     "fmt"
+    "io/ioutil"
+    "encoding/json"
 )
 
 const (
@@ -29,19 +31,32 @@ type Pokedex struct {
 }
 
 func LoadPokedex() (Pokedex, error) {
-    unparsed, err := RequestJSON(POKEDEX_REGISTRY_URL)
-    if err != nil {
-        return Pokedex{}, err
+    pokedex := Pokedex{}
+    filePath, _ := getCachePath("pokedex.json")
+    if !existsInCache(filePath) {
+        err := RequestToPath(POKEDEX_REGISTRY_URL, filePath)
+        if err != nil {
+            return pokedex, err
+        }
     }
-    parsed := make(map[int]PokedexPokemon)
+    file, err := ioutil.ReadFile(filePath)
+    if err != nil {
+        return pokedex, err
+    }
+    var unparsed map[string]interface{}
+    err = json.Unmarshal(file, &unparsed)
+    if err != nil {
+        return pokedex, err
+    }
+    pokedex.index = make(map[int]PokedexPokemon)
     for key, value := range unparsed {
         index, err := strconv.Atoi(key)
         if err != nil {
             return Pokedex{}, err
         }
-        parsed[index] = PokedexPokemon{index, value.(string)}
+        pokedex.index[index] = PokedexPokemon{index, value.(string)}
     }
-    return Pokedex{parsed}, nil
+    return pokedex, nil
 }
 
 func (dex *Pokedex) Get(index int) PokedexPokemon {

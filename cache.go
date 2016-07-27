@@ -23,11 +23,18 @@ func getCachePath(path... string) (string, error) {
     return cachePath, nil;
 }
 
+func existsInCache(path string) bool {
+    if _, err := os.Stat(path); !os.IsNotExist(err) {
+        return true
+    }
+    return false
+}
+
 func DownloadIcon(index int) (string, error) {
     path, _ := getCachePath("icons", strconv.Itoa(index) + ".png")
-    if _, err := os.Stat(path); os.IsNotExist(err) {
+    if !existsInCache(path) {
         url := fmt.Sprintf(POKEDEX_POKEMON_ICON_URL, index)
-        err = RequestToPath(url, path)
+        err := RequestToPath(url, path)
         if err != nil {
             return "", err
         }
