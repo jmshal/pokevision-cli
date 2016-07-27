@@ -1,4 +1,4 @@
-**The PokéVision servers are now behind CloudFlare DDoS protection, meaning it's possible that during certain parts of the day, the cli is unable to communicate with their servers.**
+<!--**The PokéVision servers are now behind CloudFlare DDoS protection, meaning it's possible that during certain parts of the day, the cli is unable to communicate with their servers.**-->
 
 # (Unofficial) PokéVision CLI
 
