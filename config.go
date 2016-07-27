@@ -19,5 +19,5 @@ type SlackConfig struct {
 }
 
 type NotificationConfig struct {
-	// TODO
+	Enable bool
 }

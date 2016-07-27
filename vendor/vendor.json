@@ -43,6 +43,12 @@
 			"revisionTime": "2016-04-01T22:14:33Z"
 		},
 		{
+			"checksumSHA1": "0LxZKE4y1Vzff32xdqhN8C0ouUg=",
+			"path": "github.com/deckarep/gosx-notifier",
+			"revision": "9daaf8a4715ebe4daf300036644762fe27d3aded",
+			"revisionTime": "2016-02-05T06:52:41Z"
+		},
+		{
 			"checksumSHA1": "lUBE/ZMjzN5VJkT6lgQw3WI72lo=",
 			"path": "github.com/dustin/go-humanize",
 			"revision": "2fcb5204cdc65b4bec9fd0a87606bb0d0e3c54e8",

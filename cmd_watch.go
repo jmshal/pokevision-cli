@@ -58,6 +58,10 @@ var WatchCommand = cli.Command{
             Name:  "ignore-common",
             Usage: "prevents notifying you of pokémon which show up litterally everywhere",
         },
+        cli.BoolFlag{
+            Name:  "notify",
+            Usage: "pushes desktop notifications when there are new Pokémon (OS X only)",
+        },
     },
 }
 
@@ -75,6 +79,9 @@ func WatchAction(c *cli.Context) error {
             Enable: c.Bool("slack"),
             WebhookURL: c.String("slack-webhook-url"),
             Channel: c.String("slack-channel"),
+        },
+        Notification: NotificationConfig{
+            Enable: c.Bool("notify"),
         },
     }
 
@@ -142,6 +149,10 @@ func WatchAction(c *cli.Context) error {
 
                 if config.Slack.Enable {
                     go OutputToSlack(meta, config)
+                }
+
+                if config.Notification.Enable {
+                    go OutputToNotificationCenter(meta, config)
                 }
             }
         }

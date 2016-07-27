@@ -6,6 +6,8 @@ import (
     "io/ioutil"
     "errors"
     "strconv"
+    "path/filepath"
+    "os"
 )
 
 func RequestJSON(url string) (map[string]interface{}, error) {
@@ -42,4 +44,26 @@ func RequestAPI(url string) (map[string]interface{}, error) {
 
 func CheckRequestStatus(data map[string]interface{}) bool {
     return data["status"] == "success"
+}
+
+func RequestToPath(url, path string) error {
+    resp, err := http.Get(url)
+    if err != nil {
+        return err
+    }
+    defer resp.Body.Close()
+    data, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        return err
+    }
+    parent := filepath.Join(path, "..")
+    err = os.MkdirAll(parent, 0777)
+    if err != nil {
+        return err
+    }
+    err = ioutil.WriteFile(path, data, 0777)
+    if err != nil {
+        return err
+    }
+    return nil
 }

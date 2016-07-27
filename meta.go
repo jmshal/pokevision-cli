@@ -13,6 +13,8 @@ type PokemonMeta struct {
 	Distance int
 	Location string
 	URL string
+	Pokemon Pokemon
+	PokedexPokemon PokedexPokemon
 }
 
 func GetPokemonMeta(config Config, pokedex Pokedex, pokemon Pokemon) PokemonMeta {
@@ -26,5 +28,7 @@ func GetPokemonMeta(config Config, pokedex Pokedex, pokemon Pokemon) PokemonMeta
 		Distance: int(DistanceBetweenDP(config.Lat, config.Lon, pokemon.Latitude, pokemon.Longitude, 0)),
 		Location: config.Name,
 		URL: fmt.Sprintf("https://maps.google.com/maps?q=%v,%v&z=19", pokemon.Latitude, pokemon.Longitude),
+		Pokemon: pokemon,
+		PokedexPokemon: pokedexPokemon,
 	}
 }
