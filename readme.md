@@ -74,7 +74,7 @@ Expires in 4 minutes
 
 ## Upcoming features
 
-- Desktop notifications
+- Desktop notifications (preview available in [1.0.6-rc.1](https://github.com/jacobmarshall/pokevision-cli/releases/tag/1.0.6-rc.1))
 - Pokémon rarity filter
 
 ## Acknowledgments
