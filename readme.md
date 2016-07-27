@@ -10,6 +10,11 @@ This tool allows you to talk directly to the PokéVision API servers. Right now 
 - Push updates to a Slack channel
 - No dependencies, lightweight & simple
 
+## Upcoming features
+
+- Desktop notifications (preview available in [1.0.6-rc.1](https://github.com/jacobmarshall/pokevision-cli/releases/tag/1.0.6-rc.1))
+- Pokémon rarity filter
+
 ## Screenshots
 
 ![Desktop notifications](./screenshot-notification.png)
@@ -71,11 +76,6 @@ Omanyte (https://maps.google.com/maps?q=34.009281622135,-118.49784634188&z=19)
 Expires in 4 minutes
 
 ```
-
-## Upcoming features
-
-- Desktop notifications (preview available in [1.0.6-rc.1](https://github.com/jacobmarshall/pokevision-cli/releases/tag/1.0.6-rc.1))
-- Pokémon rarity filter
 
 ## Acknowledgments
 
