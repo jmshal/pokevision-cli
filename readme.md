@@ -34,19 +34,19 @@ The following platforms are officially supported. This means they're tested befo
 
 ### For Mac OSX
 
-[Download v1.0.5](https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.5/darwin-amd64.tar.gz)
+[Download v1.0.6](https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.6/darwin-amd64.tar.gz)
 
 or
 
 ```sh
-$ curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.5/darwin-amd64.tar.gz
+$ curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.6/darwin-amd64.tar.gz
 $ tar -xvzf darwin-amd64.tar.gz
 $ sudo mv ./pokevision /usr/local/bin
 ```
 
 ### For Windows
 
-[Download v1.0.5](https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.5/windows-amd64.zip)
+[Download v1.0.6](https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.6/windows-amd64.zip)
 
 ## Usage
 
