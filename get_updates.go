@@ -4,15 +4,15 @@ type Updates struct {
     New []Pokemon
 }
 
-func getPokemonIDs(pokemons []Pokemon) []int {
-    var ids []int
+func getPokemonUIDs(pokemons []Pokemon) []string {
+    var uids []string
     for _, pokemon := range pokemons {
-        ids = append(ids, pokemon.ID)
+        uids = append(uids, pokemon.UID())
     }
-    return ids
+    return uids
 }
 
-func contains(arr []int, item int) bool {
+func contains(arr []string, item string) bool {
     for _, value := range arr {
         if value == item {
             return true
@@ -22,15 +22,15 @@ func contains(arr []int, item int) bool {
 }
 
 func GetUpdates(previous, current []Pokemon) Updates {
-    previousIDs := getPokemonIDs(previous)
-    var currentIDs []int
+    previousUIDs := getPokemonUIDs(previous)
+    var currentUIDs []string
     var new []Pokemon
     for _, pokemon := range current {
         // Only if the pokemon hasn't been seen yet
         // And while we're at it, de-dupe the ones with the same UIDs
-        if !contains(previousIDs, pokemon.ID) && !contains(currentIDs, pokemon.ID) {
+        if !contains(previousUIDs, pokemon.UID()) && !contains(currentUIDs, pokemon.UID()) {
             new = append(new, pokemon)
-            currentIDs = append(currentIDs, pokemon.ID)
+            currentUIDs = append(currentUIDs, pokemon.UID())
         }
     }
     return Updates{new}

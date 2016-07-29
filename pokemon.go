@@ -1,6 +1,9 @@
 package main
 
-import "time"
+import (
+    "time"
+    "fmt"
+)
 
 type Pokemon struct {
     ID        int
@@ -8,6 +11,10 @@ type Pokemon struct {
     PokedexID int
     Latitude  float64
     Longitude float64
+}
+
+func (p *Pokemon) UID() string {
+    return fmt.Sprintf("%v-%v-%v-%v", p.ExpiresAt, p.PokedexID, p.Latitude, p.Longitude)
 }
 
 func (p *Pokemon) IsVisible() bool {
