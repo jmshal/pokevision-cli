@@ -26,6 +26,7 @@ Together, the command you run should look something like this...
 
 ```sh
 pokevision watch \
+  --forever \
   --lat=40.712774 \
   --lon=-74.013408 \
   --name="World Trade Center" \
