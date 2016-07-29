@@ -4,6 +4,8 @@ import (
     "strconv"
     "fmt"
     "encoding/json"
+    "strings"
+    "errors"
 )
 
 const (
@@ -52,6 +54,15 @@ func LoadPokedex(locale string) (Pokedex, error) {
 
 func (dex *Pokedex) Get(index int) PokedexPokemon {
     return dex.index[index]
+}
+
+func (dex *Pokedex) GetByName(name string) (PokedexPokemon, error) {
+    for _, pokedexPokemon := range dex.index {
+        if strings.ToLower(pokedexPokemon.Name) == strings.ToLower(name) {
+            return pokedexPokemon, nil
+        }
+    }
+    return PokedexPokemon{}, errors.New("Unknown Pokémon named " + name)
 }
 
 func (p *PokedexPokemon) Icon() string {

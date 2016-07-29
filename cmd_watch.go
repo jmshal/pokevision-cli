@@ -5,6 +5,7 @@ import (
     "github.com/urfave/cli"
     "log"
     "time"
+    "strings"
 )
 
 var WatchCommand = cli.Command{
@@ -67,6 +68,14 @@ var WatchCommand = cli.Command{
             Name:  "notify",
             Usage: "pushes desktop notifications when there are new Pokémon (OS X only)",
         },
+        cli.StringFlag{
+            Name:  "only",
+            Usage: "filter only the Pokémon matching these names (comma delimited)",
+        },
+        cli.StringFlag{
+            Name:  "ignore",
+            Usage: "filter out the Pokémon matching these names (comma delimited)",
+        },
     },
 }
 
@@ -80,7 +89,6 @@ func WatchAction(c *cli.Context) error {
         ForceInitial: c.Bool("force-initial"),
         Forever: c.BoolT("forever"),
         Range: c.Int("range"),
-        IgnoreCommon: c.Bool("ignore-common"),
         Slack: SlackConfig{
             Enable: c.Bool("slack"),
             WebhookURL: c.String("slack-webhook-url"),
@@ -120,6 +128,28 @@ func WatchAction(c *cli.Context) error {
         log.Fatalln(err)
     }
 
+    // Ignore no pokemon by default
+    filter := NewFilter(FILTER_IGNORE, []int{})
+
+    if c.Bool("ignore-common") {
+        // Ignore all the common ones
+        filter = NewFilter(FILTER_IGNORE, COMMON_POKEMON)
+    }
+
+    if c.String("only") != "" {
+        filter, err = NewFilterFromPokedexNames(FILTER_ONLY, pokedex, strings.Split(c.String("only"), ","))
+        if err != nil {
+            log.Fatalln(err)
+        }
+    }
+
+    if c.String("ignore") != "" {
+        filter, err = NewFilterFromPokedexNames(FILTER_IGNORE, pokedex, strings.Split(c.String("ignore"), ","))
+        if err != nil {
+            log.Fatalln(err)
+        }
+    }
+
     count := 0
     for {
         count++
@@ -144,11 +174,11 @@ func WatchAction(c *cli.Context) error {
         for _, pokemon := range new {
             pokedexPokemon := pokedex.Get(pokemon.PokedexID)
 
-            shouldIgnore := config.IgnoreCommon && pokedexPokemon.IsCommon()
+            isAllowed := filter.IsAllowed(pokedexPokemon.Index)
             isVisible := pokemon.IsVisible()
             isInRange := pokemon.IsInRange(config.Lat, config.Lon, config.Range)
 
-            if !shouldIgnore && isVisible && isInRange {
+            if isAllowed && isVisible && isInRange {
                 meta := GetPokemonMeta(config, pokedex, pokemon)
 
                 OutputToTerminal(meta, config)
