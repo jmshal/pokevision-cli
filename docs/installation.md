@@ -7,7 +7,7 @@ Installing for Mac OS X is as simple as placing the binary into the `/usr/local/
 You can automate the process by running the following snippet;
 
 ```sh
-curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.7/darwin-amd64.tar.gz
+curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.8/darwin-amd64.tar.gz
 tar -xvzf darwin-amd64.tar.gz
 sudo mv ./pokevision /usr/local/bin
 ```
@@ -35,7 +35,7 @@ Depending on who you're logged in as, you may not need to run the last line with
 ### 64 bit
 
 ```sh
-curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.7/linux-amd64.tar.gz
+curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.8/linux-amd64.tar.gz
 tar -xvzf linux-amd64.tar.gz
 sudo mv ./pokevision /usr/local/bin
 ```
@@ -43,7 +43,7 @@ sudo mv ./pokevision /usr/local/bin
 ### 32 bit
 
 ```sh
-curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.7/linux-386.tar.gz
+curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.8/linux-386.tar.gz
 tar -xvzf linux-386.tar.gz
 sudo mv ./pokevision /usr/local/bin
 ```
@@ -51,7 +51,7 @@ sudo mv ./pokevision /usr/local/bin
 ### arm
 
 ```sh
-curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.7/linux-arm.tar.gz
+curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.8/linux-arm.tar.gz
 tar -xvzf linux-arm.tar.gz
 sudo mv ./pokevision /usr/local/bin
 ```
