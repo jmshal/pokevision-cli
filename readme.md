@@ -12,71 +12,15 @@ This tool allows you to talk directly to the PokéVision API servers. Right now 
 - Desktop notifications (for Mac OS X)
 - Multi-language Pokémon names
 
-## Upcoming features
-
-- Pokémon rarity filter
-
 ## Screenshots
 
 ![Desktop notifications](./screenshots/notification.png)
 ![Slack notifications](./screenshots/slack.png)
 ![Terminal output](./screenshots/terminal.png)
 
-## Support
+## Getting Started
 
-The following platforms are officially supported. This means they're tested before each release.
-
-- Mac OS X El Capitan (64 bit)
-- Windows 10 (64 bit)
-- Ubuntu 16.04 (64 bit)
-
-## Install
-
-### For Mac OSX
-
-[Download v1.0.6](https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.6/darwin-amd64.tar.gz)
-
-or
-
-```sh
-$ curl -LO https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.6/darwin-amd64.tar.gz
-$ tar -xvzf darwin-amd64.tar.gz
-$ sudo mv ./pokevision /usr/local/bin
-```
-
-### For Windows
-
-[Download v1.0.6](https://github.com/jacobmarshall/pokevision-cli/releases/download/1.0.6/windows-amd64.zip)
-
-## Usage
-
-```sh
-$ pokevision watch --lat=34.00846023931052 --lon=-118.49802017211914 --name=Office
-Goldeen (https://maps.google.com/maps?q=34.008127253796,-118.49830250257&z=19)
-45m away from Office
-Expires in 8 minutes
-
-Goldeen (https://maps.google.com/maps?q=34.008127253796,-118.49830250257&z=19)
-45m away from Office
-Expires in 8 minutes
-
-Goldeen (https://maps.google.com/maps?q=34.008127253796,-118.49830250257&z=19)
-45m away from Office
-Expires in 8 minutes
-
-Electabuzz (https://maps.google.com/maps?q=34.008790763176,-118.49757264487&z=19)
-55m away from Office
-Expires in 1 minute
-
-Electabuzz (https://maps.google.com/maps?q=34.008790763176,-118.49757264487&z=19)
-55m away from Office
-Expires in 1 minute
-
-Omanyte (https://maps.google.com/maps?q=34.009281622135,-118.49784634188&z=19)
-93m away from Office
-Expires in 4 minutes
-
-```
+Check out the [docs](./docs/readme.md) for [installation instructions](.docs/installation.md) and [basic usage](.docs/basic-usage.md).
 
 ## Acknowledgments
 

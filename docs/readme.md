@@ -7,3 +7,4 @@
 - [Filters](./filters.md)
 - [Range restrictions](./range-restrictions.md)
 - [Changing languages](./languages.md)
+- [Support](./support.md)
