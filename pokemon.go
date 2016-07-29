@@ -14,7 +14,7 @@ type Pokemon struct {
 }
 
 func (p *Pokemon) UID() string {
-	return fmt.Sprintf("%v-%v-%v-%v", p.ExpiresAt, p.PokedexID, p.Latitude, p.Longitude)
+	return fmt.Sprintf("%v-%v-%v", p.PokedexID, p.Latitude, p.Longitude)
 }
 
 func (p *Pokemon) IsVisible() bool {
