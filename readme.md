@@ -1,4 +1,4 @@
-<!--**The PokéVision servers are now behind CloudFlare DDoS protection, meaning it's possible that during certain parts of the day, the cli is unable to communicate with their servers.**-->
+**PokéVision changed their API again. If you're having issues, please update to the [latest](https://github.com/jacobmarshall/pokevision-cli/releases/latest) version. Sorry for any inconvenience this may have caused.**
 
 # (Unofficial) PokéVision CLI
 
