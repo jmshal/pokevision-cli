@@ -9,7 +9,7 @@ This tool allows you to talk directly to the PokéVision API servers. Right now 
 - Periodically checks the PokéVision API for new Pokémon
 - Push updates to a Slack channel ([howto](./docs/slack-notifications.md))
 - No dependencies, lightweight & simple
-- Desktop notifications (for Mac OS X) ([howto](./docs/desktop-notifications.md))
+- Desktop notifications ([howto](./docs/desktop-notifications.md))
 - Multi-language Pokémon names ([howto](./docs/languages.md))
 - Filtering in/out specific Pokémon ([howto](./docs/filters.md))
 

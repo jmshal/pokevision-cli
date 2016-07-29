@@ -73,6 +73,12 @@
 			"revisionTime": "2016-07-29T07:12:26Z"
 		},
 		{
+			"checksumSHA1": "ldi+mtA4M+NVItb1HWqRI3hafHA=",
+			"path": "github.com/jacobmarshall/go-toast",
+			"revision": "23ba1ef5e787658c0ce4e3e82b0a3011e7c853b3",
+			"revisionTime": "2016-07-29T13:38:10Z"
+		},
+		{
 			"checksumSHA1": "oigwHdtDGtv0Essm53eYMVr/b34=",
 			"path": "github.com/kellydunn/golang-geo",
 			"revision": "6f16b0ccf2a6ebd1a234daacfb6199510fbd0db4",
@@ -107,6 +113,12 @@
 			"path": "github.com/mattn/go-isatty",
 			"revision": "56b76bdf51f7708750eac80fa38b952bb9f32639",
 			"revisionTime": "2015-12-11T00:06:21Z"
+		},
+		{
+			"checksumSHA1": "gcLub3oB+u4QrOJZcYmk/y2AP4k=",
+			"path": "github.com/nu7hatch/gouuid",
+			"revision": "179d4d0c4d8d407a32af483c2354df1d2c91e6c3",
+			"revisionTime": "2013-12-21T20:05:32Z"
 		},
 		{
 			"checksumSHA1": "0Il1DbcyN359or+I4zLd6lwFirk=",

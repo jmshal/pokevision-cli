@@ -1,4 +1,4 @@
 vendor/
 !vendor/vendor.json
 bin/
-pokevision-cli
+pokevision-cli*
