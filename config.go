@@ -1,22 +1,22 @@
 package main
 
 type Config struct {
-	Locale string
-	Lat, Lon float64
-	Name string
-	Interval int
+	Locale       string
+	Lat, Lon     float64
+	Name         string
+	Interval     int
 	ForceInitial bool
-	Range int
-	Forever bool
+	Range        int
+	Forever      bool
 	IgnoreCommon bool
-	Slack SlackConfig
+	Slack        SlackConfig
 	Notification NotificationConfig
 }
 
 type SlackConfig struct {
-	Enable bool
+	Enable     bool
 	WebhookURL string
-	Channel string
+	Channel    string
 }
 
 type NotificationConfig struct {

@@ -7,30 +7,30 @@ import (
 )
 
 type SlackPayload struct {
-	Username string `json:"username"`
-	IconEmoji string `json:"icon_emoji"`
-	IconURL string `json:"icon_url"`
-	Channel string `json:"channel"`
-	Text string `json:"text"`
+	Username    string            `json:"username"`
+	IconEmoji   string            `json:"icon_emoji"`
+	IconURL     string            `json:"icon_url"`
+	Channel     string            `json:"channel"`
+	Text        string            `json:"text"`
 	Attachments []SlackAttachment `json:"attachments"`
-	Markdown bool `json:"mrkdwn"`
+	Markdown    bool              `json:"mrkdwn"`
 }
 
 type SlackAttachment struct {
-	Fallback string `json:"fallback"`
-	Color string `json:"color"`
-	Pretext string `json:"pretext"`
-	Title string `json:"title"`
-	TitleLink string `json:"title_link"`
-	Text string `json:"text"`
-	Fields []SlackAttachmentField `json:"fields"`
-	MarkdownIn []string `json:"mrkdwn_in"`
+	Fallback   string                 `json:"fallback"`
+	Color      string                 `json:"color"`
+	Pretext    string                 `json:"pretext"`
+	Title      string                 `json:"title"`
+	TitleLink  string                 `json:"title_link"`
+	Text       string                 `json:"text"`
+	Fields     []SlackAttachmentField `json:"fields"`
+	MarkdownIn []string               `json:"mrkdwn_in"`
 }
 
 type SlackAttachmentField struct {
 	Title string `json:"title"`
 	Value string `json:"value"`
-	Short bool `json:"short"`
+	Short bool   `json:"short"`
 }
 
 type SlackClient struct {

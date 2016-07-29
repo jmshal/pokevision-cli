@@ -1,44 +1,44 @@
 package main
 
 import (
-    "os/user"
-    "path/filepath"
-    "strconv"
-    "fmt"
-    "os"
+	"os/user"
+	"path/filepath"
+	"strconv"
+	"fmt"
+	"os"
 )
 
 func getCachePath(path... string) (string, error) {
-    usr, err := user.Current()
+	usr, err := user.Current()
 
-    if err != nil {
-        return "", err
-    }
+	if err != nil {
+		return "", err
+	}
 
-    cachePath := filepath.Join(usr.HomeDir, ".pokevision-cli")
-    if len(path) > 0 {
-        cachePath = filepath.Join(cachePath, filepath.Join(path...))
-    }
+	cachePath := filepath.Join(usr.HomeDir, ".pokevision-cli")
+	if len(path) > 0 {
+		cachePath = filepath.Join(cachePath, filepath.Join(path...))
+	}
 
-    return cachePath, nil;
+	return cachePath, nil;
 }
 
 func existsInCache(path string) bool {
-    if _, err := os.Stat(path); !os.IsNotExist(err) {
-        return true
-    }
-    return false
+	if _, err := os.Stat(path); !os.IsNotExist(err) {
+		return true
+	}
+	return false
 }
 
 func DownloadIcon(index int) (string, error) {
-    path, _ := getCachePath("icons", strconv.Itoa(index) + ".png")
-    if !existsInCache(path) {
-        url := fmt.Sprintf(POKEDEX_POKEMON_ICON_URL, index)
-        err := RequestToPath(url, path)
-        if err != nil {
-            return "", err
-        }
-        return path, nil
-    }
-    return path, nil
+	path, _ := getCachePath("icons", strconv.Itoa(index) + ".png")
+	if !existsInCache(path) {
+		url := fmt.Sprintf(POKEDEX_POKEMON_ICON_URL, index)
+		err := RequestToPath(url, path)
+		if err != nil {
+			return "", err
+		}
+		return path, nil
+	}
+	return path, nil
 }

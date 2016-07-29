@@ -6,15 +6,15 @@ import (
 )
 
 type PokemonMeta struct {
-	Name string
-	Icon string
-	ExpiresAt time.Time
+	Name                string
+	Icon                string
+	ExpiresAt           time.Time
 	Latitude, Longitude float64
-	Distance int
-	Location string
-	URL string
-	Pokemon Pokemon
-	PokedexPokemon PokedexPokemon
+	Distance            int
+	Location            string
+	URL                 string
+	Pokemon             Pokemon
+	PokedexPokemon      PokedexPokemon
 }
 
 func GetPokemonMeta(config Config, pokedex Pokedex, pokemon Pokemon) PokemonMeta {
