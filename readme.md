@@ -13,15 +13,15 @@ This tool allows you to talk directly to the PokéVision API servers. Right now 
 - Multi-language Pokémon names ([howto](./docs/languages.md))
 - Filtering in/out specific Pokémon ([howto](./docs/filters.md))
 
+## Getting Started
+
+Check out the [docs](./docs/readme.md) for [installation instructions](./docs/installation.md) and [basic usage](./docs/basic-usage.md).
+
 ## Screenshots
 
 ![Desktop notifications](./screenshots/notification.png)
 ![Slack notifications](./screenshots/slack.png)
 ![Terminal output](./screenshots/terminal.png)
-
-## Getting Started
-
-Check out the [docs](./docs/readme.md) for [installation instructions](./docs/installation.md) and [basic usage](./docs/basic-usage.md).
 
 ## Acknowledgments
 
