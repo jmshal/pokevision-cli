@@ -22,6 +22,8 @@ To tell the CLI where to push the notifications, we pass the Webhook URL from be
 
 And optionally, if you wish to post to a different channel, you can pass the name of that channel to the `--slack-channel` flag.
 
+It's also worth noting that if you're looking to run this continuously, and ignore any potential downtimes that the PokéVision may experience, you can add the `--forever` flag. Check out [advanced usage](./advanced-usage.md) for more info.
+
 Together, the command you run should look something like this...
 
 ```sh
