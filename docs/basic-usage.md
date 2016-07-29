@@ -6,7 +6,7 @@ If you need help finding them, check out [whereamirightnow.com](https://whereami
 
 For example, these are the coordinates for the World Trade Center;
 
-Latitude: 40.712774
+Latitude: 40.712774  
 Longitude: -74.013408
 
 We can now pipe these coordinates into the CLI like so;
