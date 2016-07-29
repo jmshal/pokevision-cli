@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-const VERSION = "1.0.8"
+const VERSION = "1.0.9"
 
 func main() {
 	bugsnag.Configure(bugsnag.Configuration{
