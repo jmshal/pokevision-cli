@@ -16,7 +16,7 @@ var WatchCommand = cli.Command{
         cli.StringFlag{
             Name:  "locale",
             Usage: "the locale for Pokémon names",
-            Value: "en",
+            Value: GetDefaultLocale(),
         },
         cli.Float64Flag{
             Name:  "lon",
