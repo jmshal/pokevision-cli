@@ -21,12 +21,10 @@ func FetchPokemonsInRegion(lat, lon float64) ([]Pokemon, error) {
         pokemonId := int(rawPokemon["pokemonId"].(float64))
         pokemons[index] = Pokemon{
             ID: int(rawPokemon["id"].(float64)),
-            UID: rawPokemon["uid"].(string),
             ExpiresAt: time.Unix(int64(rawPokemon["expiration_time"].(float64)), 0),
             PokedexID: pokemonId,
             Latitude: rawPokemon["latitude"].(float64),
             Longitude: rawPokemon["longitude"].(float64),
-            IsAlive: rawPokemon["is_alive"].(bool),
         }
     }
     return pokemons, nil
