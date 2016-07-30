@@ -76,6 +76,10 @@ var WatchCommand = cli.Command{
 			Name:  "ignore",
 			Usage: "filter out the Pokémon matching these names (comma delimited)",
 		},
+		cli.StringFlag{
+			Name:  "format",
+			Usage: "customise the terminal output (see golang.org/pkg/text/template for more info)",
+		},
 	},
 }
 
@@ -89,6 +93,7 @@ func WatchAction(c *cli.Context) error {
 		ForceInitial: c.Bool("force-initial"),
 		Forever: c.BoolT("forever"),
 		Range: c.Int("range"),
+		Format: c.String("format"),
 		Slack: SlackConfig{
 			Enable: c.Bool("slack"),
 			WebhookURL: c.String("slack-webhook-url"),

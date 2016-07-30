@@ -7,6 +7,7 @@ type Config struct {
 	Interval     int
 	ForceInitial bool
 	Range        int
+	Format       string
 	Forever      bool
 	IgnoreCommon bool
 	Slack        SlackConfig

@@ -9,6 +9,7 @@ type PokemonMeta struct {
 	Name                string
 	Icon                string
 	ExpiresAt           time.Time
+	ExpiresAtTimestamp  int
 	Latitude, Longitude float64
 	Distance            int
 	Location            string
@@ -23,6 +24,7 @@ func GetPokemonMeta(config Config, pokedex Pokedex, pokemon Pokemon) PokemonMeta
 		Name: pokedexPokemon.Name,
 		Icon: pokedexPokemon.Icon(),
 		ExpiresAt: pokemon.ExpiresAt,
+		ExpiresAtTimestamp: int(pokemon.ExpiresAt.Unix()),
 		Latitude: pokemon.Latitude,
 		Longitude: pokemon.Longitude,
 		Distance: int(DistanceBetweenDP(config.Lat, config.Lon, pokemon.Latitude, pokemon.Longitude, 0)),
