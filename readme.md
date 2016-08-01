@@ -1,4 +1,4 @@
-**PokéVision changed their API again. If you're having issues, please update to the [latest](https://github.com/jacobmarshall/pokevision-cli/releases/latest) version. Sorry for any inconvenience this may have caused.**
+**PokéVision has shutdown (for now). Follow [@PokeVisionGo](https://twitter.com/PokeVisionGo) on Twitter for updates.**
 
 # (Unofficial) PokéVision CLI
 
