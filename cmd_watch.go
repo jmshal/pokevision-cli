@@ -106,6 +106,7 @@ func WatchAction(c *cli.Context) error {
 
 	handleError := func(err error) {
 		if config.Forever {
+			log.Println(err)
 			time.Sleep(time.Second * time.Duration(5))
 		} else {
 			bugsnag.Notify(err)
